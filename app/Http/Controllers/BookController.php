@@ -9,9 +9,10 @@ class BookController extends Controller
 {
     public function store()
     {
-        Book::create([
-            "title"=>request('title'),
-            'author'=>request('author')
+        $data = request()->validate([
+            "title" => 'required'
         ]);
+
+        Book::create($data);
     }
 }
