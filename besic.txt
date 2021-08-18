@@ -7,3 +7,5 @@ vendor/bin/phpunit --filter a_title_is_required
 vendor/bin/phpunit --filter a_author_is_required
 
 vendor/bin/phpunit --filter BookReservationTest
+
+php artisan make:test AuthorManagementTest
