@@ -34,4 +34,16 @@ class BookReservationTest extends TestCase
         $response->assertSessionHasErrors('title');
     }
 
+    /** @test */
+    public function a_author_is_required()
+    {
+//        $this->withoutExceptionHandling();
+        $response = $this->post("/books",[
+            "title" => "hello",
+            "author" => ""
+        ]);
+
+        $response->assertSessionHasErrors('author');
+    }
+
 }

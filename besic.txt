@@ -4,3 +4,6 @@ pf='clear && phpunit --filter'
 
 vendor/bin/phpunit --filter a_book_can_be_added_to_the_library
 vendor/bin/phpunit --filter a_title_is_required
+vendor/bin/phpunit --filter a_author_is_required
+
+vendor/bin/phpunit --filter BookReservationTest
