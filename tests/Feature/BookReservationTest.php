@@ -16,7 +16,7 @@ class BookReservationTest extends TestCase
 
        $respose = $this->post('/books',[
             'title'=>'Cool Book Title',
-            'author'=>'Vector',
+            'author'=>'iuiuiui',
         ]);
         $respose->assertOk();
         $this->assertCount(1,Book::all());
@@ -59,13 +59,27 @@ class BookReservationTest extends TestCase
         $response = $this->patch("/books/".$book->id,[
             "title" => "New title",
             "author" => "New Author"
+
         ]);
 //        dd(Book::all());
 
         $this->assertEquals("New title",Book::first()->title);
         $this->assertEquals("New Author",Book::first()->author);
-
-
+        $response->assertRedirect($book->path());
     }
 
+    /** @test */
+    public function a_book_can_be_deleted()
+    {
+//        $this->withoutExceptionHandling();
+        $this->post("/books",[
+            "title" => "Testing",
+            "author" => "testing"
+        ]);
+        $this->assertCount(1,Book::all());
+        $book =  Book::first();
+        $res = $this->delete("/books/".$book->id);
+        $this->assertCount(0,Book::all());
+        $res->assertRedirect("/books");
+    }
 }
